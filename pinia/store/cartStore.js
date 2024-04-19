@@ -7,16 +7,27 @@ export default defineStore("cart", {
     }),
     actions: {
         addToCart(productId, qty = 1) {
-        console.log(productId, qty);
-        this.cart.push({
-            id: new Date().getTime(),
-            productId,
-            qty,
-        });
+        //取得已經有加入購物車的項目
+        //進行判斷,如果購物車有該項目則+1,如果沒有則是新增一個購物車項目
+        const currentCart = this.cart.find((item)=>item.productId===productId);
+        if(currentCart){
+            currentCart.qty+=qty;
+        }else{
+            this.cart.push({
+                id: new Date().getTime(),
+                productId,
+                qty,
+            });
+        }
+        console.log(this.cart);
         },
         removeCartItem(id){
             const index = this.cart.findIndex((item)=>item.id===id);
             this.cart.splice(index,1);
+        },
+        setCartQty(id,event){
+            const currentCart = this.cart.find((item)=>item.id===id);
+            currentCart.qty = event.target.value*1;
         }
     },
     getters: {
