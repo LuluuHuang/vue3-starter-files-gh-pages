@@ -25,7 +25,7 @@ export default{
                 <td>
                     <select name="" id="" class="form-select" :value="item.qty"
                     @change="(evt)=>setCartQty(item.id,evt)">
-                    <option value="" v-for="i in 20" :key="i">{{i}}</option>
+                    <option :value="i" v-for="i in 20" :key="i">{{i}}</option>
                     </select>
                 </td>
                 <td class="text-end">NT$ {{item.subtotal}}</td>
